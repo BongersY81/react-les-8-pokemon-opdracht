@@ -1,1 +1,17 @@
-/*Schrijf hier jouw eigen CSS!*/
+ul {
+    list-style: none;
+}
+
+button {
+    margin-right: 10px;
+    color: blue;
+}
+
+button:disabled {
+    background: black;
+    color: white;
+}
+
+body {
+    background-color: yellow;
+}

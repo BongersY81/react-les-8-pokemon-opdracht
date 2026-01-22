@@ -1,12 +1,12 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
+import './PokemonCard.css';
 
 function PokemonCard({url}) {
 
     const [pokemon, setPokemon] = useState({});
     const [loading, toggleLoading] = useState(false);
-    const[error, toggleError] = useState(false);
-
+    const [error, toggleError] = useState(false);
 
 
     async function singlePokemon() {
@@ -16,7 +16,7 @@ function PokemonCard({url}) {
             console.log(result.data);
             setPokemon(result.data);
         } catch (error) {
-            console.error("het laden van de Pokemon is niet gelukt");
+            console.error('het laden van de Pokemon is niet gelukt');
             toggleError(true);
         } finally {
             toggleLoading(false);
@@ -30,8 +30,10 @@ function PokemonCard({url}) {
 
     return (
         <>
-            <button type="button" onClick={} disabled={}>vorige</button>
-            <button type="button" onClick={} disabled={}>volgende</button>
+
+            {error && <p className="error-message">Sorry er is iets misgegaan. Probeer het nog eens opnieuw.</p>}
+            {loading && <p className="loading-pokemoncard">De pokemonkaart wordt opgehaald</p>}
+
             {Object.keys(pokemon).length > 0 &&
                 <article className="pokemon-card">
                     <span>{pokemon.name}</span>
