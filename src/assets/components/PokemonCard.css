@@ -1,11 +1,24 @@
 .pokemon-card {
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
     border: 1px solid black;
     width: 200px;
-    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh ;
+    gap: 1rem;
+    list-style: none;
+    margin: 10px;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.pokemon-information {
+    margin-right: 30px;
+    align-items: center;
+    justify-content: center;
 }
 

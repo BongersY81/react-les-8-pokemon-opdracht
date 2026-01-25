@@ -10,26 +10,29 @@ function App() {
     const [loading, toggleLoading] = useState(false);
     const [error, toggleError] = useState(false);
 
-    async function getPokemonInformation() {
-        toggleLoading(true)
-        try {
-            const result = await
-                axios.get(endpoint);
-            console.log(result.data);
-            setPokemon(result.data);
-        } catch (error) {
-            toggleError(true)
-            console.error('Het laden van de Pokemon is niet gelukt');
-        } finally {
-            toggleLoading(false)
+    useEffect(() => {
+        const controller = new AbortController
+
+        async function getPokemonInformation() {
+            toggleLoading(true)
+            try {
+                const result = await
+                    axios.get(endpoint, {signal: controller.signal,});
+                console.log(result.data);
+                setPokemon(result.data);
+            } catch (error) {
+                toggleError(true)
+                console.error('Het laden van de Pokemon is niet gelukt');
+            } finally {
+                toggleLoading(false)
+            }
+
         }
 
-    }
-
-    useEffect(() => {
         void getPokemonInformation();
         console.log('pokemonkaarten worden opgehaald')
         return function cleanup() {
+            controller.abort();
             console.log("aanvraag wordt verwijderd")
         };
     }, [endpoint]);
@@ -37,17 +40,20 @@ function App() {
 
     return (
         <>
-            <h1>Gotta catch em all!</h1>
+            <h1>POKEMON</h1>
 
-            <button type="button" onClick={() => setEndpoint(pokemon.previous)}
-                    disabled={pokemon.previous === null}>vorige</button>
+
+                <button type="button" onClick={() => setEndpoint(pokemon.previous)}
+                        disabled={pokemon.previous === null}>vorige
+                </button>
             <button type="button" onClick={() => setEndpoint(pokemon.next)}
-                    disabled={pokemon.next === null}>volgende</button>
+                    disabled={pokemon.next === null}>volgende
+            </button>
 
             {error && <p className="error-message">Sorry er is iets misgegaan. Probeer het nog eens opnieuw.</p>}
             {loading && <p className="loading-pokemoncard">De pokemonkaart wordt opgehaald</p>}
 
-            <ul>
+            <ul className="card-container">
                 {pokemon?.results?.length > 0 &&
                     (pokemon?.results?.map((pokemon) => {
                         return <li key={pokemon.name}>

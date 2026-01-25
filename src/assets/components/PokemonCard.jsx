@@ -13,7 +13,7 @@ function PokemonCard({url}) {
         toggleLoading(true);
         try {
             const result = await axios.get(url)
-            console.log(result.data);
+            // console.log(result.data);
             setPokemon(result.data);
         } catch (error) {
             console.error('het laden van de Pokemon is niet gelukt');
@@ -44,9 +44,10 @@ function PokemonCard({url}) {
 
                     <ul>
                         {pokemon.abilities.map((url) => (
-                            <li key={url.ability.name}>
+                            <li key={url.ability.name} className="pokemon-information">
                                 {url.ability.name}
                             </li>
+
                         ))}
                     </ul>
                 </article>

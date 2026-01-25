@@ -2,9 +2,15 @@ ul {
     list-style: none;
 }
 
+.card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 button {
-    margin-right: 10px;
-    color: blue;
+margin-right: 10px;
+
 }
 
 button:disabled {
@@ -14,4 +20,11 @@ button:disabled {
 
 body {
     background-color: yellow;
+
+}
+
+h1 {
+    text-align: center;
+    color:black;
+    font-weight: bold;
 }
